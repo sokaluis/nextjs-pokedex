@@ -1,5 +1,6 @@
 import Head from "next/head";
 import { FC, PropsWithChildren } from "react";
+import { Navbar } from '../ui';
 
 interface LayoutProps extends PropsWithChildren<{}> {
   title: string;
@@ -15,9 +16,11 @@ export const Layout: FC<LayoutProps> = ({ children, title }) => {
         <meta name="keywords" content={`${title}, pokemon, pokedex`} />
       </Head>
 
-      {/* <Navbar />  */}
+      <Navbar />
 
-      <main>
+      <main style={{
+        padding: '0 20px'
+      }}>
         {children}
       </main>
     </>
