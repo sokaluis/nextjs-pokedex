@@ -16,7 +16,7 @@ export const Navbar = () => {
       backgroundColor: theme?.colors.gray100.value
     }}>
       <Link href='/' passHref>
-        <div style={{ display: 'flex', alignItems: 'center' }}>
+        <div style={{ display: 'flex', alignItems: 'baseline', paddingTop: '5px' }}>
           <Image
             alt="Image app"
             src={`https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/dream-world/${randomIntFromInterval(1, 151)}.svg`}
@@ -24,7 +24,7 @@ export const Navbar = () => {
             height={30}
           />
           <Text color="white" h2 css={{
-            paddingLeft: 5
+            paddingLeft: 10
           }}>P</Text>
           <Text color="white" h3>okemon</Text>
         </div>
@@ -32,7 +32,9 @@ export const Navbar = () => {
       <Spacer css={{
         flex: 1
       }} />
-      <Text color="white">Favoritos</Text>
+      <Link href='/favorites' passHref>
+        <Text color="white">Favoritos</Text>
+      </Link>
     </div>
   );
 };
