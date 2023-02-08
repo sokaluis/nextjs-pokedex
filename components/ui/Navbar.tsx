@@ -1,5 +1,7 @@
+import { randomIntFromInterval } from "@/utils";
 import { Spacer, Text, useTheme } from "@nextui-org/react";
 import Image from "next/image";
+import Link from "next/link";
 
 export const Navbar = () => {
   const { theme } = useTheme();
@@ -13,14 +15,20 @@ export const Navbar = () => {
       padding: '0 20px',
       backgroundColor: theme?.colors.gray100.value
     }}>
-      <Image
-        alt="Image app"
-        src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/back/132.png"
-        width={70}
-        height={70}
-      />
-      <Text color="white" h2>P</Text>
-      <Text color="white" h3>okemon</Text>
+      <Link href='/' passHref>
+        <div style={{ display: 'flex', alignItems: 'center' }}>
+          <Image
+            alt="Image app"
+            src={`https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/dream-world/${randomIntFromInterval(1, 151)}.svg`}
+            width={30}
+            height={30}
+          />
+          <Text color="white" h2 css={{
+            paddingLeft: 5
+          }}>P</Text>
+          <Text color="white" h3>okemon</Text>
+        </div>
+      </Link>
       <Spacer css={{
         flex: 1
       }} />
