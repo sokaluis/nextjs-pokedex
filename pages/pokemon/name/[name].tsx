@@ -1,23 +1,23 @@
-import { useState } from "react";
-import { pokeApi } from "@/api";
-import { Layout } from "@/components/layouts";
-import { Pokemon } from "@/typescript";
-import { localFavorite } from "@/utils";
-import { Button, Card, Container, Grid, Image, Text } from "@nextui-org/react";
-import { GetStaticPaths, GetStaticProps, NextPage } from "next";
-import confetti from "canvas-confetti";
+import { pokeApi } from '@/api';
+import { Layout } from '@/components/layouts';
+import { Pokemon, PokemonListResponse } from '@/typescript';
+import localFavorites from '@/utils/localFavorites';
+import { Button, Card, Container, Grid, Image, Text } from '@nextui-org/react';
+import confetti from 'canvas-confetti';
+import { GetStaticPaths, GetStaticProps, NextPage } from 'next';
+import { useState } from 'react';
 
 interface PokemonPageProps {
   pokemon: Pokemon;
 }
 
-const PokemonPage: NextPage<PokemonPageProps> = ({ pokemon }) => {
+const PokemonByNamePage: NextPage<PokemonPageProps> = ({ pokemon }) => {
   const { name } = pokemon;
 
-  const [isFavorite, setIsFavorite] = useState(localFavorite.exitInFavorite(pokemon.id));
+  const [isFavorite, setIsFavorite] = useState(localFavorites.exitInFavorite(pokemon.id));
 
   const onToggleFavorite = () => {
-    localFavorite.toggleFavorite(pokemon.id);
+    localFavorites.toggleFavorite(pokemon.id);
     setIsFavorite(!isFavorite);
     if (isFavorite) return;
     confetti({
@@ -95,30 +95,23 @@ const PokemonPage: NextPage<PokemonPageProps> = ({ pokemon }) => {
   );
 };
 
-
-
 export const getStaticPaths: GetStaticPaths = async (ctx) => {
-  const mockPokeArr = [...Array(151)].map((_, index) => `${index + 1}`);
+  const { data: {
+    results
+  } } = await pokeApi.get<PokemonListResponse>('/pokemon?limit=151');
 
   return {
-    paths: mockPokeArr.map(id => ({
-      params: { id },
+    paths: results.map(({ name }) => ({
+      params: { name },
     })),
-    // paths: [
-    //   {
-    //     params: {
-    //       id: '1'
-    //     }
-    //   }
-    // ],
     fallback: false
   };
 };
 
 export const getStaticProps: GetStaticProps = async ({ params }) => {
-  const { id } = params as { id: string; };
+  const { name } = params as { name: string; };
 
-  const { data } = await pokeApi.get<Pokemon>(`/pokemon/${id}`);
+  const { data } = await pokeApi.get<Pokemon>(`/pokemon/${name}`);
 
   return {
     props: {
@@ -127,4 +120,4 @@ export const getStaticProps: GetStaticProps = async ({ params }) => {
   };
 };
 
-export default PokemonPage;;
+export default PokemonByNamePage;
