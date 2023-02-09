@@ -7,7 +7,7 @@ interface PokemonCardProps {
   pokemon: SmallPokemon;
 }
 
-export const PokemonCard: FC<PokemonCardProps> = ({ pokemon: { sprite, name, id } }) => {
+export const PokemonCard: FC<PokemonCardProps> = ({ pokemon: { url, name, id } }) => {
   const router = useRouter();
 
   const onclickById = () => {
@@ -25,7 +25,7 @@ export const PokemonCard: FC<PokemonCardProps> = ({ pokemon: { sprite, name, id 
           padding: 1
         }}>
           <Card.Image
-            src={sprite}
+            src={url || ''}
             width="100%"
             height={140}
           />
