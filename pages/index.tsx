@@ -2,7 +2,7 @@ import { NextPage, GetStaticProps } from "next";
 import { Layout } from "@/components/layouts";
 import { pokeApi } from "@/api";
 import { PokemonListResponse, SmallPokemon } from "@/typescript";
-import { Card, Grid, Row, Text } from "@nextui-org/react";
+import { Grid } from "@nextui-org/react";
 import { PokemonCard } from "@/components/pokemon";
 
 interface HomeProps {
