@@ -26,7 +26,7 @@ export const Navbar = () => {
           <Text color="white" h2 css={{
             paddingLeft: 10
           }}>P</Text>
-          <Text color="white" h3>okemon</Text>
+          <Text color="white" h3>okemon!!</Text>
         </div>
       </Link>
       <Spacer css={{
